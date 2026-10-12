@@ -57,7 +57,7 @@ echo 1 > ~/.claude/orc-work-notify.muted   # mute
 
 ## Players
 
-Tries `afplay` (macOS), `pw-play`, `paplay`, `ffplay`, `aplay` in that order, falling through when one is missing or fails. Windows is not supported (PRs welcome).
+Tries `afplay` (macOS), `pw-play`, `paplay`, `ffplay`, `aplay`, then `powershell.exe` (Windows, via Git Bash) in that order, falling through when one is missing or fails.
 
 ## License
 

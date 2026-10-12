@@ -23,10 +23,12 @@ fi
 # on it). Try players in order and fall through on failure: `command -v` only
 # proves a binary exists, not that it can play (pw-play errors without a PipeWire node).
 (
-  for P in afplay pw-play paplay ffplay aplay; do
+  for P in afplay pw-play paplay ffplay aplay powershell.exe; do
     command -v "$P" >/dev/null || continue
     case "$P" in
       ffplay) "$P" -nodisp -autoexit -loglevel quiet "$F" ;;
+      # Windows (Git Bash): SoundPlayer ships with .NET. Path goes in via env so quotes in it can't break the command.
+      powershell.exe) command -v cygpath >/dev/null && ORC_WAV="$(cygpath -w "$F")" "$P" -NoProfile -NonInteractive -Command '(New-Object Media.SoundPlayer $env:ORC_WAV).PlaySync()' ;;
       *)      "$P" "$F" ;;
     esac && exit 0
   done

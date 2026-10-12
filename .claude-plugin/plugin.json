@@ -1,6 +1,6 @@
 {
   "name": "orc-work-notify",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Plays a sound when Claude finishes a task (Stop) or needs your attention (Notification). Bring your own orc.",
   "author": { "name": "Evangelos Karatzas", "url": "https://github.com/vagkaratzas" },
   "repository": "https://github.com/vagkaratzas/orc-work-notify",
