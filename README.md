@@ -44,6 +44,8 @@ Prefer a different orc? Any orc. *That* orc. Drop your own `.wav` files in, name
 | `~/.claude/sounds/{submit,attention,stop}.wav` | every project |
 | `<project>/.claude/sounds/{submit,attention,stop}.wav` | that project only |
 
+They live outside the plugin, so updates never overwrite them, and copyrighted clips you own a copy of stay on your machine instead of in this repo. Skip a file to keep the bundled one.
+
 ### A folder of orcs
 
 Each event can also be a folder of `.wav` files, and one is picked at random every time:
@@ -53,9 +55,7 @@ Each event can also be a folder of `.wav` files, and one is picked at random eve
 | `~/.claude/sounds/{submit,attention,stop}/*.wav` | every project |
 | `<project>/.claude/sounds/{submit,attention,stop}/*.wav` | that project only |
 
-At each level a folder beats a single `.wav` of the same name, and the most specific level still wins. An empty folder is ignored.
-
-They live outside the plugin, so updates never overwrite them, and copyrighted clips you own a copy of stay on your machine instead of in this repo. Skip a file to keep the bundled one.
+At each level a folder beats a single `.wav` of the same name, and the most specific level still wins. An empty folder is ignored, and only lowercase `.wav` files count (`clip.WAV` is skipped).
 
 ## Mute
 

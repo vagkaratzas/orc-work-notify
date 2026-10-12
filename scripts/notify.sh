@@ -9,10 +9,10 @@ case "$1" in submit|attention|stop) ;; *) exit 0 ;; esac
 # At each level a folder <event>/ of .wav files (one picked at random) beats a single <event>.wav.
 F=""
 for D in "${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}/sounds" "$HOME/.claude/sounds" "${CLAUDE_PROJECT_DIR:-.}/.claude/sounds"; do
-  C=()
-  for W in "$D/$1"/*.wav; do [[ -f "$W" ]] && C+=("$W"); done
-  if (( ${#C[@]} )); then
-    F="${C[RANDOM % ${#C[@]}]}"
+  CLIPS=()
+  for W in "$D/$1"/*.wav; do [[ -f "$W" ]] && CLIPS+=("$W"); done
+  if (( ${#CLIPS[@]} )); then
+    F="${CLIPS[RANDOM % ${#CLIPS[@]}]}"
   elif [[ -f "$D/$1.wav" ]]; then
     F="$D/$1.wav"
   fi
