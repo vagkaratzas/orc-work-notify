@@ -6,9 +6,16 @@ case "$1" in submit|attention|stop) ;; *) exit 0 ;; esac
 [[ -s "$HOME/.claude/orc-work-notify.muted" ]] && exit 0
 
 # Most specific wins: plugin default < ~/.claude/sounds < <project>/.claude/sounds.
+# At each level a folder <event>/ of .wav files (one picked at random) beats a single <event>.wav.
 F=""
 for D in "${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}/sounds" "$HOME/.claude/sounds" "${CLAUDE_PROJECT_DIR:-.}/.claude/sounds"; do
-  [[ -f "$D/$1.wav" ]] && F="$D/$1.wav"
+  C=()
+  for W in "$D/$1"/*.wav; do [[ -f "$W" ]] && C+=("$W"); done
+  if (( ${#C[@]} )); then
+    F="${C[RANDOM % ${#C[@]}]}"
+  elif [[ -f "$D/$1.wav" ]]; then
+    F="$D/$1.wav"
+  fi
 done
 # No wav anywhere: fall back to the system's own sounds (submit stays silent).
 if [[ -z "$F" ]]; then
